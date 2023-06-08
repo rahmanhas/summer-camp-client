@@ -10,10 +10,20 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.13.4",
+    "firebase": "^9.22.1",
+    "flowbite": "^1.6.5",
+    "flowbite-react": "^0.4.7",
+    "jsonwebtoken": "^9.0.0",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-google-login": "^5.2.2",
+    "react-hook-form": "^7.44.3",
+    "react-icons": "^4.9.0",
     "react-router-dom": "^6.11.2",
     "sort-by": "^1.2.0"
   },
@@ -22,7 +32,6 @@
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react": "^4.0.0",
     "autoprefixer": "^10.4.14",
-    "daisyui": "^3.0.3",
     "eslint": "^8.38.0",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
