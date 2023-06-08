@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
 import { FaListUl } from "react-icons/fa";
@@ -13,10 +13,15 @@ const menu = <>
     </>
 
 const NavBar = () => {
-    //const {user} = useContext(AuthContext)
+    const {user, logOut} = useContext(AuthContext)
     const [isOpen, setIsOpen] = useState(false)
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from.pathname || '/'
     //console.log(isOpen);
-
+    const handleLogOut = ()=>{
+    logOut().then(navigate(from)).catch(error=>console.log(error.message))
+    }
   
     return (
 
@@ -32,15 +37,18 @@ const NavBar = () => {
             </div>
             <div className='hidden md:block'>
                 {/* buttons  */}
-                {/* {user ? <>
-                        <button>Logout</button>
+                {user ? <>
+                    <div className='flex justify-between align-center'>
+                    <img className="pr-2 rounded-full"  src={user?.photoURL} alt="" width={45} height={45}/>
+                    <button onClick={handleLogOut} type="button" className="text-white bg-pink-400 hover:bg-pink-700 focus:outline-none focus:ring-4 focus:ring-pink-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-pink-900">LogOut</button>
+                    </div>
                     </> : <>
                         <div className='flex justify-between align-center'>
-                            <img className="pl-2"  src={user?.image} alt="" />
-                            <button className="pl-2" >login</button>
+                            
+                            <Link to="/login"><button className="text-white bg-pink-400 hover:bg-pink-700 focus:outline-none focus:ring-4 focus:ring-pink-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-pink-900" >login</button></Link>
                         </div>
-                    </>} */}
-                <button type="button" className="text-white bg-pink-400 hover:bg-pink-700 focus:outline-none focus:ring-4 focus:ring-pink-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-pink-900">LogOut</button>
+                    </>}
+
             </div>
             <div onClick={() => setIsOpen(!isOpen)} className='md:hidden'>
                 <div className='flex justify-end'><FaListUl className='text-2xl'></FaListUl ></div>

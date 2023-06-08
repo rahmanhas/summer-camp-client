@@ -5,12 +5,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDmOFAbRGKorc2LU2xFfYt7QMWhljRjLSI",
-  authDomain: "dance-flow-academy.firebaseapp.com",
-  projectId: "dance-flow-academy",
-  storageBucket: "dance-flow-academy.appspot.com",
-  messagingSenderId: "1072992925866",
-  appId: "1:1072992925866:web:5ff448bba0be20e6f9b8d3"
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTHDOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MISSINGSENDERID,
+  appId: import.meta.env.VITE_APP_KEY,
 };
 
 // Initialize Firebase

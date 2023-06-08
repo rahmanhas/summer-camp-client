@@ -4,6 +4,10 @@ import Main from '../Layout/MAin';
 import Home from '../Pages/HomePage/Home';
 import Registration from '../Pages/Registration/Registration';
 import Login from '../Pages/Login/Login';
+import Dashboard from '../Layout/Dashboard';
+import Instructor from '../Dashboards/Instructor.jsx/Instructor';
+import PrivateRoute from './PrivateRoute';
+
 
 const Router = createBrowserRouter([
     {
@@ -24,6 +28,16 @@ const Router = createBrowserRouter([
         },
       ]
     },
+    {
+      path:"/dashboard",
+      element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+      children:[
+        {
+          path: '/dashboard/instructor',
+          element: <Instructor></Instructor>
+        }
+      ]
+    }
   ]);
 
 export default Router;

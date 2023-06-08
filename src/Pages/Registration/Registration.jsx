@@ -20,19 +20,27 @@ const Registration = () => {
         //console.log(data);
        createUser(data.email,data.password).then(result=>{
         setUser(result.user);
-        updateUserProfile(data.name,data.photoURL)
+        updateUserProfile(data.name,data.photoURL).then(()=>{
+            const savedUser = {name:data.name, email: data.email}
+            fetch(`${import.meta.env.VITE_SERVER_URL}/users`, { 
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(savedUser)
+            }).then(res=>res.json())
+            .then(data=>{
+                console.log(data);
+            })
+        })
         navigate(from)
        })
        .catch(error=>console.log(error))
-        
-
-
-
     };
     const password = React.useRef({});
     password.current = watch('password', '');
 
-
+    
     return (
         <div className='bg-black text-black'>
             <h2 className='text-6xl text-center font-bold text-white py-5'>Register Please</h2>
