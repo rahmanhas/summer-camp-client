@@ -7,6 +7,8 @@ import Login from '../Pages/Login/Login';
 import Dashboard from '../Layout/Dashboard';
 import Instructor from '../Dashboards/Instructor.jsx/Instructor';
 import PrivateRoute from './PrivateRoute';
+import AddAClass from '../Dashboards/Instructor.jsx/AddAClass';
+import MyClass from '../Dashboards/Instructor.jsx/MyClass';
 
 
 const Router = createBrowserRouter([
@@ -34,8 +36,14 @@ const Router = createBrowserRouter([
       children:[
         {
           path: '/dashboard/instructor',
-          element: <Instructor></Instructor>
-        }
+          element: <Instructor></Instructor>,
+        },
+        {
+          path: '/dashboard/addaclass', element: <AddAClass></AddAClass>
+        },
+        {
+          path: '/dashboard/myclasses', element: <MyClass></MyClass>
+        },
       ]
     }
   ]);
