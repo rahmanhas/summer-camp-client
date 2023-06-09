@@ -1,14 +1,29 @@
 import axios from 'axios';
-import { Table } from 'flowbite-react';
+import { Button, Table, Modal } from 'flowbite-react';
 import React, { useEffect, useState } from 'react';
+
 
 const MyClass = () => {
     const [classes, setClasses] = useState([])
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     useEffect(() => {
         fetch(`${import.meta.env.VITE_SERVER_URL}/classinfo`).then(res => res.json()).then(data => setClasses(data))
     }, [])
-    console.log(classes);
+
+    const handleUpdateClass = (id) => {
+       // console.log(id)
+        setIsModalOpen(true)
+       // console.log(isModalOpen)
+
+
+    }
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
+
+    //console.log(classes);
     return (
         <div>
             <h2 className='text-6xl text-center my-10'>My Classes</h2>
@@ -41,14 +56,35 @@ const MyClass = () => {
                                 <Table.Cell>{classItem.totalEnrolled ? classItem.totalEnrolled : 0}</Table.Cell>
                                 <Table.Cell>{classItem.availableSeats}</Table.Cell>
                                 <Table.Cell>{classItem.status}</Table.Cell>
-                                <Table.Cell>{/* Update button */}</Table.Cell>
-                                <Table.Cell>{/* Feedback button */}</Table.Cell>
+                                <Table.Cell><Button className='' onClick={() => handleUpdateClass(classItem._id)} color="warning">Update</Button></Table.Cell>
+                                <Table.Cell>Add Feedback</Table.Cell>
                             </Table.Row>
                         ))}
 
                     </Table.Body>
                 </Table>
             </div>
+            {/* Modal  */}
+            <div>
+
+
+                {isModalOpen && (
+                    <Modal onClose={closeModal}>
+                        <h3>Update Class</h3>
+                        {/* Add your modal content here */}
+                        {/* For example, you can include a form to update the class */}
+                        <form>
+                            <label>
+                                New Class Name:
+                                <input type="text" />
+                            </label>
+                            {/* Add more fields as needed */}
+                            <button type="submit">Update</button>
+                        </form>
+                    </Modal>
+                )}
+            </div>
+
         </div>
     );
 };
