@@ -1,10 +1,12 @@
 import { Button, Table } from 'flowbite-react';
 import React, { useState } from 'react';
 import axios from 'axios';
-import { becomeAdmin } from '../Utility/auth';
+import { becomeAdmin, becomeInstructor } from '../Utility/auth';
 
 const ManageUsers = () => {
     const [allEmail,setAllEmail] = useState([])
+    const [isAdmin,setIsAdmin] = useState(false)
+    const [isInsructor,setIsInstructor] = useState(false)
 
 
 
@@ -22,13 +24,20 @@ const ManageUsers = () => {
 
 
     const handleMakeAdmin = email =>{
-        console.log(email);
-        //becomeAdmin(email)
+        //console.log(email);
+        becomeAdmin(email).then(data=>{
+            console.log(data);
+            alert("Role changed to Admin")
+        })
     }
     const handleMakeInstructor = email =>{
-        console.log(email);
-        //becomeAdmin(email)
+        //console.log(email);
+        becomeInstructor(email).then(data=>{
+            console.log(data);
+            alert("Role changed to Instructor")
+        })
     }
+
     return (
         <div>
             <h2 className='text-6xl text-center my-10'>Manage Users</h2>
@@ -49,8 +58,8 @@ const ManageUsers = () => {
                         {allEmail.map((email) => (
                             <Table.Row key={email._id}>
                                 <Table.Cell>{email.email}</Table.Cell>
-                                <Table.Cell><Button onClick={()=>handleMakeAdmin(email.email)} color="failure">make admin</Button> </Table.Cell>
-                                <Table.Cell><Button  onClick={()=>handleMakeInstructor(email.email) }color="purple">make instructor</Button> </Table.Cell>
+                                <Table.Cell><Button onClick={()=>handleMakeAdmin(email.email)} color="failure" disabled={email.role === "admin"}>make admin</Button> </Table.Cell>
+                                <Table.Cell><Button  onClick={()=>handleMakeInstructor(email.email) }color="purple" disabled={email.role === "instructor"}>make instructor</Button> </Table.Cell>
                                 
                                 {/* <Table.Cell>{classItem.price}</Table.Cell>
                                 <Table.Cell>{classItem.status}</Table.Cell>

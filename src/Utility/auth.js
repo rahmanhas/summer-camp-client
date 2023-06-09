@@ -22,7 +22,7 @@ export const saveUser = user => {
       role: 'admin',
     }
   
-    return fetch(`${import.meta.env.VITE_API_URL}/users/${email}`, {
+    return fetch(`${import.meta.env.VITE_SERVER_URL}/users/${email}`, {
       method: 'PUT',
       headers: {
         'content-type': 'application/json',
@@ -36,7 +36,7 @@ export const saveUser = user => {
       role: 'instructor',
     }
   
-    return fetch(`${import.meta.env.VITE_API_URL}/users/${email}`, {
+    return fetch(`${import.meta.env.VITE_SERVER_URL}/users/${email}`, {
       method: 'PUT',
       headers: {
         'content-type': 'application/json',
