@@ -7,6 +7,7 @@ import { AuthContext } from '../../Provider/AuthProvider';
 import { GoogleLogin } from 'react-google-login';
 import { Button } from 'flowbite-react';
 import { GoogleAuthProvider } from 'firebase/auth';
+import { saveUser } from '../../Utility/auth';
 
 const googleProvider = new GoogleAuthProvider();
 const Login = () => {
@@ -34,6 +35,18 @@ const Login = () => {
         signIn(data.email, data.password).then(result => {
             setUser(result.user);
             navigate(from);
+            console.log(user)
+            // const savedUser = {name:data.name, email: data.email}
+            // fetch(`${import.meta.env.VITE_SERVER_URL}/users`, { 
+            //     method: 'POST',
+            //     headers: {
+            //         'content-type': 'application/json'
+            //     },
+            //     body: JSON.stringify(savedUser)
+            // }).then(res=>res.json())
+            // .then(data=>{
+            //     console.log(data);
+            // })
         }).catch(error => setError(error.message))
 
     };
@@ -44,6 +57,8 @@ const Login = () => {
             setUser(result.user);
             navigate(from)
             setError("")
+            saveUser(result.user)
+            
         }).catch(error=>setError(error.message))
     };
 

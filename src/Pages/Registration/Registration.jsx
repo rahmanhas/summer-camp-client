@@ -1,8 +1,9 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
 import './registration.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
+import { saveUser } from '../../Utility/auth';
 
 const Registration = () => {
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
@@ -10,7 +11,10 @@ const Registration = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from.pathname || '/';
-
+    const [error, setError] = useState('');
+    useEffect(() => {
+        setError("")
+    }, [])
 
     const onSubmit = (data, event) => {
         event.preventDefault();
@@ -21,21 +25,23 @@ const Registration = () => {
        createUser(data.email,data.password).then(result=>{
         setUser(result.user);
         updateUserProfile(data.name,data.photoURL).then(()=>{
-            const savedUser = {name:data.name, email: data.email}
-            fetch(`${import.meta.env.VITE_SERVER_URL}/users`, { 
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(savedUser)
-            }).then(res=>res.json())
-            .then(data=>{
-                console.log(data);
-            })
+            saveUser(result.user)
+            alert(`Welcome Onboard`)
+            // const savedUser = {name:data.name, email: data.email}
+            // fetch(`${import.meta.env.VITE_SERVER_URL}/users`, { 
+            //     method: 'POST',
+            //     headers: {
+            //         'content-type': 'application/json'
+            //     },
+            //     body: JSON.stringify(savedUser)
+            // }).then(res=>res.json())
+            // .then(data=>{
+            //     console.log(data);
+            // })
         })
         navigate(from)
        })
-       .catch(error=>console.log(error))
+       .catch(error=>setError(error.message))
     };
     const password = React.useRef({});
     password.current = watch('password', '');
@@ -103,7 +109,7 @@ const Registration = () => {
                         minLength: 8
                     })}
                 />
-
+                {error && <p className='text-yellow-300'>{error}</p>}
                 <input type="submit" />
                 <p className='pb-5'><small className='text-lg text-white'>Already have an account <Link className='text-lg text-yellow-300' to="/login">Login</Link></small></p>
             </form>

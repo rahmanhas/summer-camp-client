@@ -8,6 +8,7 @@ const LeftNav = () => {
             <NavLink className="inline-flex gap-2" to="/"> <FaHome className='text-2xl'></FaHome> Home </NavLink>
             <NavLink to='/dashboard/addaclass'>Add a Class</NavLink>
             <NavLink to='/dashboard/myclasses'>My Classes</NavLink>
+            <NavLink to='/dashboard/manageusers'>Manage Users</NavLink>
         </div>
     );
 };

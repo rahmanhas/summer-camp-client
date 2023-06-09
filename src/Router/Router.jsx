@@ -9,6 +9,7 @@ import Instructor from '../Dashboards/Instructor.jsx/Instructor';
 import PrivateRoute from './PrivateRoute';
 import AddAClass from '../Dashboards/Instructor.jsx/AddAClass';
 import MyClass from '../Dashboards/Instructor.jsx/MyClass';
+import ManageUsers from '../Dashboards/ManageUsers';
 
 
 const Router = createBrowserRouter([
@@ -43,6 +44,9 @@ const Router = createBrowserRouter([
         },
         {
           path: '/dashboard/myclasses', element: <MyClass></MyClass>
+        },
+        {
+          path: '/dashboard/manageusers', element: <ManageUsers></ManageUsers>
         },
       ]
     }
