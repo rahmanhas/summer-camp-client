@@ -92,7 +92,7 @@ const MyClass = () => {
                                 <Table.Cell>{classItem.price}</Table.Cell>
                                 <Table.Cell>{classItem.status}</Table.Cell>
                                 <Table.Cell><Button className='' onClick={() => handleUpdateClass(classItem)} color="warning">Update</Button></Table.Cell>
-                                <Table.Cell>Add Feedback</Table.Cell>
+                                <Table.Cell>{classItem?.feedback?classItem?.feedback:"No Feedback"}</Table.Cell>
                             </Table.Row>
                         ))}
 

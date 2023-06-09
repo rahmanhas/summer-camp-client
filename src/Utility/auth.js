@@ -44,6 +44,20 @@ export const saveUser = user => {
       body: JSON.stringify(currentUser),
     }).then(res => res.json())
   }
+  // class status become approved
+  export const becomeApproved = id => {
+    const currentClass = {
+      status: 'approved',
+    }
+  
+    return fetch(`${import.meta.env.VITE_SERVER_URL}/classdata/${id}`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(currentClass),
+    }).then(res => res.json())
+  }
   
   // Get role
   export const getRole = async email => {

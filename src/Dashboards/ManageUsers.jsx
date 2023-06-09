@@ -1,5 +1,5 @@
 import { Button, Table } from 'flowbite-react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { becomeAdmin, becomeInstructor } from '../Utility/auth';
 
@@ -11,17 +11,19 @@ const ManageUsers = () => {
 
 
 
-    // Make a request for a user with a given ID
+   
+useEffect(()=>{
     axios.get(`${import.meta.env.VITE_SERVER_URL}/allusers`)
-        .then(data=>setAllEmail(data.data))
-        .catch(function (error) {
-            // handle error
-            console.log(error);
-        })
-        .finally(function () {
-            // always executed
-        });
+    .then(data=>setAllEmail(data.data))
+    .catch(function (error) {
+        // handle error
+        console.log(error);
+    })
+    .finally(function () {
+        // always executed
+    });
 
+},[])
 
     const handleMakeAdmin = email =>{
         //console.log(email);
@@ -61,10 +63,6 @@ const ManageUsers = () => {
                                 <Table.Cell><Button onClick={()=>handleMakeAdmin(email.email)} color="failure" disabled={email.role === "admin"}>make admin</Button> </Table.Cell>
                                 <Table.Cell><Button  onClick={()=>handleMakeInstructor(email.email) }color="purple" disabled={email.role === "instructor"}>make instructor</Button> </Table.Cell>
                                 
-                                {/* <Table.Cell>{classItem.price}</Table.Cell>
-                                <Table.Cell>{classItem.status}</Table.Cell>
-                                <Table.Cell><Button className='' onClick={() => handleUpdateClass(classItem)} color="warning">Update</Button></Table.Cell>
-                                <Table.Cell>Add Feedback</Table.Cell> */}
                             </Table.Row>
                         ))}
 
