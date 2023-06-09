@@ -24,6 +24,7 @@ const AddAClass = () => {
             instructorName: event.target.instructorName.value,
             instructorEmail: event.target.instructorEmail.value,
             availableSeats: event.target.availableSeats.value,
+            price: event.target.price.value,
             status: "pending"
         })
             .then(response => {
@@ -99,7 +100,7 @@ const AddAClass = () => {
                         </div>
                         <TextInput
                             id="email1"
-                            placeholder="name@flowbite.com"
+                            placeholder="Email"
                             name='instructorEmail'
                             value={`${user.email}`}
                             required
@@ -131,7 +132,7 @@ const AddAClass = () => {
                             />
                         </div>
                         <TextInput
-                            id="availableSeats"
+                            id="Price"
                             placeholder="Price"
                             name="price"
                             min='0'
