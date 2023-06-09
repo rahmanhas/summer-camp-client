@@ -9,6 +9,7 @@ const LeftNav = () => {
             <NavLink to='/dashboard/addaclass'>Add a Class</NavLink>
             <NavLink to='/dashboard/myclasses'>My Classes</NavLink>
             <NavLink to='/dashboard/manageusers'>Manage Users</NavLink>
+            <NavLink to='/dashboard/manageclasses'>Manage Classes</NavLink>
         </div>
     );
 };

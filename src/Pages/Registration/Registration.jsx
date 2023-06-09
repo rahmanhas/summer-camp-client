@@ -7,7 +7,7 @@ import { saveUser } from '../../Utility/auth';
 
 const Registration = () => {
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
-    const { user,setUser,createUser,signIn,signInWithGoogle, updateUserProfile} = useContext(AuthContext)
+    const { user, setUser, createUser, signIn, signInWithGoogle, updateUserProfile } = useContext(AuthContext)
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from.pathname || '/';
@@ -19,34 +19,23 @@ const Registration = () => {
     const onSubmit = (data, event) => {
         event.preventDefault();
 
-       // console.log("Form submitted");
+        // console.log("Form submitted");
         //console.log("RESULT", data);
-        //console.log(data);
-       createUser(data.email,data.password).then(result=>{
-        setUser(result.user);
-        updateUserProfile(data.name,data.photoURL).then(()=>{
-            saveUser(result.user)
-            alert(`Welcome Onboard`)
-            // const savedUser = {name:data.name, email: data.email}
-            // fetch(`${import.meta.env.VITE_SERVER_URL}/users`, { 
-            //     method: 'POST',
-            //     headers: {
-            //         'content-type': 'application/json'
-            //     },
-            //     body: JSON.stringify(savedUser)
-            // }).then(res=>res.json())
-            // .then(data=>{
-            //     console.log(data);
-            // })
+        console.log(data);
+        createUser(data.email, data.password).then(result => {
+            setUser(result.user);
+            updateUserProfile(data.name, data.photoURL).then(() => {
+                saveUser(result.user)
+                alert(`Welcome Onboard`)
+            })
+            navigate(from)
         })
-        navigate(from)
-       })
-       .catch(error=>setError(error.message))
+            .catch(error => setError(error.message))
     };
     const password = React.useRef({});
     password.current = watch('password', '');
 
-    
+
     return (
         <div className='bg-black text-black'>
             <h2 className='text-6xl text-center font-bold text-white py-5'>Register Please</h2>
@@ -54,7 +43,7 @@ const Registration = () => {
                 <label>Name</label>
                 <input
                     type="text"
-                    {...register("Name", { required: true, maxLength: 80 })}
+                    {...register("name", { required: true, maxLength: 80 })}
                 />
                 <label>Email</label>
                 <input
