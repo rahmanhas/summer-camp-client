@@ -12,17 +12,24 @@ import {
 } from 'firebase/auth'
 import { app } from '../Firebase/firebase.config'
 import axios from 'axios'
+import { getRole } from '../Utility/auth'
 
 
 export const AuthContext = createContext(null)
 
 const auth = getAuth(app)
-const googleProvider = new GoogleAuthProvider()
+//const googleProvider = new GoogleAuthProvider()
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
+  const [role, setRole] = useState(null)
   const [loading, setLoading] = useState(true)
- 
+
+  useEffect(() => {
+    if (user) {
+      getRole(user.email).then(data => setRole(data))
+    }
+  }, [user])
 
   const createUser = (email, password) => {
     setLoading(true)
@@ -64,6 +71,7 @@ const AuthProvider = ({ children }) => {
         axios.post(`${import.meta.env.VITE_SERVER_URL}/jwt`,{email:currentUser.email,}).then(data=>{
           localStorage.setItem('access-token',data.data.token);
           setLoading(false)
+
         }
         )
       }else{
@@ -89,6 +97,7 @@ const AuthProvider = ({ children }) => {
     resetPassword,
     logOut,
     updateUserProfile,
+    role
   }
 
   return (

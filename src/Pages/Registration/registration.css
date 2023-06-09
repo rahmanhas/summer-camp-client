@@ -42,8 +42,11 @@ body {
     padding: 10px 15px;
     margin-bottom: 10px;
     font-size: 14px;
+    /* color: rgb(185, 14, 14); */
   }
-  
+  input[type="file"]{
+    color: rgb(185, 14, 14);
+  }
   label {
     line-height: 2;
     text-align: left;

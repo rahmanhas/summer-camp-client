@@ -4,10 +4,12 @@ import './registration.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { saveUser } from '../../Utility/auth';
+import axios from 'axios';
+
 
 const Registration = () => {
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
-    const { user, setUser, createUser, signIn, signInWithGoogle, updateUserProfile } = useContext(AuthContext)
+    const { user, setUser, createUser, updateUserProfile } = useContext(AuthContext)
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from.pathname || '/';
@@ -16,26 +18,45 @@ const Registration = () => {
         setError("")
     }, [])
 
-    const onSubmit = (data, event) => {
+    const onSubmit = async (data, event) => {
+        
         event.preventDefault();
-
-        // console.log("Form submitted");
-        //console.log("RESULT", data);
         console.log(data);
-        createUser(data.email, data.password).then(result => {
-            setUser(result.user);
-            updateUserProfile(data.name, data.photoURL).then(() => {
-                saveUser(result.user)
-                alert(`Welcome Onboard`)
+        const image = data.photoURL[0];
+        const formData = new FormData();
+        formData.append('image', image);
+    
+        try {
+          const imgbbApiKey = import.meta.env.VITE_IMGBB_KEY;
+          const url = `https://api.imgbb.com/1/upload?key=${imgbbApiKey}`;
+          const response = await axios.post(url, formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          });
+    
+          const imageUrl = response.data.data.url;
+    
+          createUser(data.email, data.password)
+            .then((result) => {
+              setUser(result.user);
+              updateUserProfile(data.name, imageUrl)
+                .then(() => {
+                  saveUser(result.user);
+                  alert('Welcome Onboard');
+                })
+                .catch((error) => setError(error.message));
+              navigate(from);
             })
-            navigate(from)
-        })
-            .catch(error => setError(error.message))
-    };
-    const password = React.useRef({});
-    password.current = watch('password', '');
-
-
+            .catch((error) => setError(error.message));
+        } catch (error) {
+          // Handle error
+        }
+      };
+    
+      const password = React.useRef({});
+      password.current = watch('password', '');
+    
     return (
         <div className='bg-black text-black'>
             <h2 className='text-6xl text-center font-bold text-white py-5'>Register Please</h2>
@@ -50,7 +71,7 @@ const Registration = () => {
                     type="email"
                     {...register("email", {
                         required: true,
-                        // pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                        
                     })}
                 />
                 <label>Password:</label>
@@ -80,7 +101,7 @@ const Registration = () => {
 
                 <label>PhotoURL</label>
                 <input
-                    type="text"
+                    type="file"
                     {...register("photoURL", { required: true })}
                 />
                 <label>Gender</label>
@@ -95,7 +116,7 @@ const Registration = () => {
                     {...register("mobileNumber", {
                         required: true,
                         maxLength: 11,
-                        minLength: 8
+                        
                     })}
                 />
                 {error && <p className='text-yellow-300'>{error}</p>}

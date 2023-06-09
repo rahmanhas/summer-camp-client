@@ -121,9 +121,9 @@ const ManageClasses = () => {
                             <Table.Cell>{individualClass.status}</Table.Cell>
                             <Table.Cell>
                                 <div className='flex flex-col gap-2'>
-                                    <Button disabled={individualClass.status === "approved" || "denied"} onClick={() => handleStatusApproved(individualClass._id)} className='w-[100px]' color="success">Approve</Button>
+                                    <Button disabled={individualClass.status === "approved" || individualClass.status === "denied"} onClick={() => handleStatusApproved(individualClass._id)} className='w-[100px]' color="success">Approve</Button>
 
-                                    <Button disabled={individualClass.status === "approved" || "denied"} onClick={() => handleStatusDenied(individualClass._id)} className='w-[100px]' color="failure">Deny</Button>
+                                    <Button disabled={individualClass.status === "approved" || individualClass.status === "denied"} onClick={() => handleStatusDenied(individualClass._id)} className='w-[100px]' color="failure">Deny</Button>
 
                                     <Button onClick={() => handleOpenFeedbackModal(individualClass)} className='w-[100px]' color="warning">Send Feedback</Button>
                                 </div>

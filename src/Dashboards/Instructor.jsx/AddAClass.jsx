@@ -6,36 +6,48 @@ import swal from 'sweetalert2';
 
 const AddAClass = () => {
     const { user } = useContext(AuthContext)
-    const handleClassSubmit = event => {
-        event.preventDefault()
+    const handleClassSubmit = async (event) => {
+        event.preventDefault();
 
         // Image Upload
-        const image = event.target.image.files[0]
-        const formData = new FormData()
-        formData.append('image', image)
+        const image = event.target.image.files[0];
+        const formData = new FormData();
+        formData.append('image', image);
 
-        const url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_KEY
-            }`
-
-
-        axios.post(`${import.meta.env.VITE_SERVER_URL}/classdetail`, {
-            className: event.target.className.value,
-            photoURL: url,
-            instructorName: event.target.instructorName.value,
-            instructorEmail: event.target.instructorEmail.value,
-            availableSeats: event.target.availableSeats.value,
-            price: event.target.price.value,
-            status: "pending"
-        })
-            .then(response => {
-                console.log(response.data.insertedId)
-                if (response.data.insertedId) {
-                    alert("Class Added Successfully!!!!!")
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
+        try {
+            const imgbbApiKey = import.meta.env.VITE_IMGBB_KEY;
+            const url = `https://api.imgbb.com/1/upload?key=${imgbbApiKey}`;
+            const response = await axios.post(url, formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              },
             });
+
+            const imageUrl = response.data.data.url;
+
+            axios
+                .post(`${import.meta.env.VITE_SERVER_URL}/classdetail`, {
+                    className: event.target.className.value,
+                    photoURL: imageUrl,
+                    instructorName: event.target.instructorName.value,
+                    instructorEmail: event.target.instructorEmail.value,
+                    availableSeats: event.target.availableSeats.value,
+                    price: event.target.price.value,
+                    status: 'pending',
+                })
+                .then((response) => {
+                   // console.log(response.data.insertedId);
+                    if (response.data.insertedId) {
+                        event.target.reset()
+                        alert('Class Added Successfully!!!!!');
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        } catch (error) {
+            console.log(error);
+        }
     }
     return (
         <div>

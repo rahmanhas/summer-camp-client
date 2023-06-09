@@ -11,12 +11,14 @@ import AddAClass from '../Dashboards/Instructor.jsx/AddAClass';
 import MyClass from '../Dashboards/Instructor.jsx/MyClass';
 import ManageUsers from '../Dashboards/ManageUsers';
 import ManageClasses from '../Dashboards/ManageClasses';
+import ErrorPage from '../Pages/ErrorPage/Error.Page';
 
 
 const Router = createBrowserRouter([
     {
       path: "/",
       element: <Main></Main>,
+      errorElement: <ErrorPage></ErrorPage>,
       children:[
         {
           path:'/',

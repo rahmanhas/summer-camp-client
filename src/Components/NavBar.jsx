@@ -25,7 +25,7 @@ const NavBar = () => {
   
     return (
 
-        <div className='bg-neutral-100 flex justify-between align-center p-5'>
+        <div className='bg-neutral-100 flex justify-between align-center p-5 mx-auto w-full max-w-screen-xl'>
             <div>
                 {/* logo  */}
                 <h1 className='text-2xl text-pink-500'>DanceFlow Academy</h1>
@@ -39,7 +39,7 @@ const NavBar = () => {
                 {/* buttons  */}
                 {user ? <>
                     <div className='flex justify-between align-center'>
-                    <img className="pr-2 rounded-full"  src={user?.photoURL} alt="" width={45} height={45} title={`${user?.name}`} />
+                    <img className="pr-2 rounded-full"  src={user?.photoURL} alt="" width={45} height={45} title={`${user?.displayName}`} />
                     <button onClick={handleLogOut} type="button" className="text-white bg-pink-400 hover:bg-pink-700 focus:outline-none focus:ring-4 focus:ring-pink-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-pink-900">LogOut</button>
                     </div>
                     </> : <>
