@@ -19,7 +19,7 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 
 const Classes = () => {
 
-    const { user, loading } = useContext(AuthContext)
+    const { user, loading, role } = useContext(AuthContext)
     const [axiosSecure] = useAxiosSecure();
 
     // axiosSecure.get(`/classdetails/${user.email}`).then(data => setClasses(data.data)).catch(error=>console.log(error))
@@ -32,9 +32,15 @@ const Classes = () => {
             return res.data
         }
     })
-    const handleClassSeletion = () => {
-
+    const handleClassSelection = (classItem) => {
+        console.log(classItem._id);
+        if(!user){
+            alert("Please Log In")
+        }else{
+            alert("Check Dashboard")
+        }
     }
+    console.log(role);
     return (
 
 
@@ -43,7 +49,7 @@ const Classes = () => {
 
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5'>
                 {classes.map((classItem) => (
-                    <div key={classItem._id}>
+                    <div className='' key={classItem._id}>
                         <Card sx={{ maxWidth: 345 }}>
                             <CardActionArea>
                                 <CardMedia
@@ -57,20 +63,20 @@ const Classes = () => {
                                     <Typography gutterBottom variant="h3" component="div">
                                         {classItem.className}
                                     </Typography>
-                                    <Typography variant="h5" color="text.primary">
+                                    <Typography variant="h4" color="text.primary">
                                         Instructor: {classItem.instructorName}
                                     </Typography>
-                                    <Typography variant="h5" color="text.primary">
-                                        {classItem.availableSeats}
+                                    <Typography variant="h6" color="text.primary">
+                                        Remaining Seats: {classItem.availableSeats}
                                     </Typography>
-                                    <Typography variant="h5" color="text.primary">
-                                        {classItem.price}
+                                    <Typography variant="h6" color="text.secondary">
+                                        $ {classItem.price}
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>
                             <CardActions>
-                                <Button size="small" color="primary">
-                                    Share
+                                <Button onClick={()=>handleClassSelection(classItem) } size="large" color="primary" disabled={role === "admin" || role === "instructor" || classItem.availableSeats === 0}>
+                                    Select
                                 </Button>
                             </CardActions>
                         </Card>
