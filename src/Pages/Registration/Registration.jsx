@@ -37,13 +37,14 @@ const Registration = () => {
           });
     
           const imageUrl = response.data.data.url;
-    
+          
           createUser(data.email, data.password)
             .then((result) => {
               setUser(result.user);
               updateUserProfile(data.name, imageUrl)
                 .then(() => {
-                  saveUser(result.user);
+                    const userInfo = {name: data.name, email: data.email, photoURL: imageUrl }
+                    saveUser(userInfo);
                   alert('Welcome Onboard');
                 })
                 .catch((error) => setError(error.message));
