@@ -5,13 +5,14 @@ import Home from '../Pages/HomePage/Home';
 import Registration from '../Pages/Registration/Registration';
 import Login from '../Pages/Login/Login';
 import Dashboard from '../Layout/Dashboard';
-import Instructor from '../Dashboards/Instructor.jsx/Instructor';
+// import Instructor from '../Dashboards/Instructor.jsx/Instructor';
 import PrivateRoute from './PrivateRoute';
 import AddAClass from '../Dashboards/Instructor.jsx/AddAClass';
 import MyClass from '../Dashboards/Instructor.jsx/MyClass';
 import ManageUsers from '../Dashboards/ManageUsers';
 import ManageClasses from '../Dashboards/ManageClasses';
 import ErrorPage from '../Pages/ErrorPage/Error.Page';
+import Instructor from '../Pages/Instructor/Instructor';
 
 
 const Router = createBrowserRouter([
@@ -32,16 +33,20 @@ const Router = createBrowserRouter([
           path:'/login',
           element:<Login></Login>
         },
+        {
+          path:'/instructors',
+          element:<Instructor></Instructor>
+        },
       ]
     },
     {
       path:"/dashboard",
       element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
       children:[
-        {
-          path: '/dashboard/instructor',
-          element: <Instructor></Instructor>,
-        },
+        // {
+        //   path: '/dashboard/instructor',
+        //   element: <Instructor></Instructor>,
+        // },
         {
           path: '/dashboard/addaclass', element: <AddAClass></AddAClass>
         },

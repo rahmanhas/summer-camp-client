@@ -3,17 +3,16 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../Provider/AuthProvider';
 import axios from 'axios';
 import swal from 'sweetalert2';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
 const AddAClass = () => {
-    const { user } = useContext(AuthContext)
+    const { user } = useContext(AuthContext);
+    const [axiosSecure] = useAxiosSecure();
     const handleClassSubmit = async (event) => {
         event.preventDefault();
-
-        // Image Upload
         const image = event.target.image.files[0];
         const formData = new FormData();
         formData.append('image', image);
-
         try {
             const imgbbApiKey = import.meta.env.VITE_IMGBB_KEY;
             const url = `https://api.imgbb.com/1/upload?key=${imgbbApiKey}`;
@@ -22,11 +21,9 @@ const AddAClass = () => {
                 'Content-Type': 'multipart/form-data',
               },
             });
-
             const imageUrl = response.data.data.url;
-
-            axios
-                .post(`${import.meta.env.VITE_SERVER_URL}/classdetail`, {
+            axiosSecure
+                .post(`/classdetail`, {
                     className: event.target.className.value,
                     photoURL: imageUrl,
                     instructorName: event.target.instructorName.value,
@@ -36,7 +33,6 @@ const AddAClass = () => {
                     status: 'pending',
                 })
                 .then((response) => {
-                   // console.log(response.data.insertedId);
                     if (response.data.insertedId) {
                         event.target.reset()
                         alert('Class Added Successfully!!!!!');

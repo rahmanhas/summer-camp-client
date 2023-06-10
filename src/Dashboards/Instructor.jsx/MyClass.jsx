@@ -1,55 +1,52 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Box, Button, Typography, Modal } from '@mui/material';
 import { Checkbox, Label, Table, TextInput } from 'flowbite-react';
+import { AuthContext } from '../../Provider/AuthProvider';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
 const MyClass = () => {
+    const {user, role } = useContext(AuthContext)
     const [classes, setClasses] = useState([])
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [currentClass, setCurrentClass] = useState({});
     const [newClassName, setNewClassName] = useState('');
 
+    const [axiosSecure] = useAxiosSecure()
+
+  
+    const getData = ()=>{
+        return axiosSecure.get(`/classdetails/${user.email}`).then(data => setClasses(data.data)).catch(error=>console.log(error))
+    }
+
     useEffect(() => {
-        fetch(`${import.meta.env.VITE_SERVER_URL}/classinfo`).then(res => res.json()).then(data => setClasses(data))
+            getData()
     }, [])
 
     const handleUpdateClass = (classItem) => {
         console.log(classItem)
         setCurrentClass(classItem);
-        
-
         setIsModalOpen(true);
-
     }
     useEffect(() => {
         console.log(currentClass);
     }, [currentClass]);
     const handleCloseModal = () => {
         setIsModalOpen(false);
-        setCurrentClass(null);
-    
+        setCurrentClass(null);    
     };
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        // Make an API request to update the class with the new class name
-        // Here's an example using axios:
-        axios
-            .put(`${import.meta.env.VITE_SERVER_URL}/updateclass/${currentClass._id}`, {
+        axiosSecure.put(`/updateclass/${currentClass._id}`, {
                 availableSeats: e.target.availableSeats.value,
                 price: e.target.price.value
             })
             .then((response) => {
-                // Handle the response as needed
                 console.log('Class updated successfully');
-                // Refresh the class data after the update
-                fetch(`${import.meta.env.VITE_SERVER_URL}/classinfo`)
-                    .then((res) => res.json())
-                    .then((data) => setClasses(data));
-                // Close the modal
+                getData()
                 handleCloseModal();
             })
             .catch((error) => {
-                // Handle any errors that occur during the request
                 console.error('Error updating class:', error);
             });
     };
@@ -85,7 +82,7 @@ const MyClass = () => {
                     </Table.Head>
                     <Table.Body className="divide-y">
                         {classes.map((classItem) => (
-                            <Table.Row key={classItem.id}>
+                            <Table.Row key={classItem._id}>
                                 <Table.Cell>{classItem.className}</Table.Cell>
                                 <Table.Cell>{classItem.totalEnrolled ? classItem.totalEnrolled : 0}</Table.Cell>
                                 <Table.Cell>{classItem.availableSeats}</Table.Cell>

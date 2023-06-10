@@ -3,8 +3,9 @@ import { useForm } from "react-hook-form";
 import './registration.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
-import { saveUser } from '../../Utility/auth';
+//import { saveUser } from '../../Utility/auth';
 import axios from 'axios';
+import { saveUser } from '../../Hooks/auth';
 
 
 const Registration = () => {

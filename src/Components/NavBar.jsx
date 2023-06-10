@@ -7,7 +7,7 @@ import { FaListUl } from "react-icons/fa";
 
 const menu = <>
         <NavLink className={({ isActive }) => isActive ? "text-lg text-pink-400 mr-2 p-2 rounded-xl" : "mr-2 p-2"} to="/">Home</NavLink>
-        <NavLink className={({ isActive }) => isActive ? "text-lg text-pink-400 mr-2 p-2 rounded-xl" : "mr-2 p-2"} to="/instructors">Instructors</NavLink>
+        <NavLink className={({ isActive }) => isActive ? "text-lg text-pink-400 mr-2 p-2 rounded-xl" : "mr-2 p-2"} to="/instructor">Instructors</NavLink>
         <NavLink className={({ isActive }) => isActive ? "text-lg text-pink-400 mr-2 p-2 rounded-xl" : "mr-2 p-2"} to="/classes">Classes</NavLink>
         <NavLink className={({ isActive }) => isActive ? "text-lg text-pink-400 mr-2 p-2 rounded-xl" : "mr-2 p-2"} to="/dashboard">Dashboard</NavLink>
     </>
@@ -25,10 +25,10 @@ const NavBar = () => {
   
     return (
 
-        <div className='bg-neutral-100 flex justify-between align-center p-5 mx-auto w-full max-w-screen-xl'>
+        <div className='bg-neutral-100 flex justify-between align-center p-5 mx-auto w-full '>
             <div>
                 {/* logo  */}
-                <h1 className='text-2xl text-pink-500'>DanceFlow Academy</h1>
+                <h2 className='text-2xl text-pink-500'>DanceFlow Academy</h2>
             </div>
             <div className='hidden md:block'>
                 {/* menu options */}

@@ -12,7 +12,7 @@ import {
 } from 'firebase/auth'
 import { app } from '../Firebase/firebase.config'
 import axios from 'axios'
-import { getRole } from '../Utility/auth'
+import { getRole } from '../Hooks/auth'
 
 
 export const AuthContext = createContext(null)
@@ -65,21 +65,16 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
-      
       setUser(currentUser)
       if(currentUser?.email){
         axios.post(`${import.meta.env.VITE_SERVER_URL}/jwt`,{email:currentUser.email,}).then(data=>{
           localStorage.setItem('access-token',data.data.token);
           setLoading(false)
-
-        }
-        )
-      }else{
+        })}else{
         localStorage.removeItem('access-token')
         setLoading(false)
       }
       console.log('current user', currentUser)
-      
     })
     return () => {
       return unsubscribe()

@@ -1,24 +1,18 @@
 import { Button, Table } from 'flowbite-react';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { becomeAdmin, becomeInstructor } from '../Utility/auth';
+import { becomeAdmin, becomeInstructor } from '../Hooks/auth';
+import useAxiosSecure from '../Hooks/useAxiosSecure';
+// import { becomeAdmin, becomeInstructor } from '../Utility/auth';
 
 const ManageUsers = () => {
     const [allEmail, setAllEmail] = useState([])
     const [currentEmail, setCurrentEmail] = useState(null)
+    const [axiosSecure] = useAxiosSecure()
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_SERVER_URL}/allusers`)
-            .then(data => setAllEmail(data.data))
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            })
-            .finally(function () {
-                // always executed
-            });
-
-    }, [currentEmail])
+        axiosSecure.get(`/allusers`).then(data => setAllEmail(data.data)).catch(error=>console.log(error))
+    }, [currentEmail, allEmail])
 
     const handleMakeAdmin = email => {
         //console.log(email);

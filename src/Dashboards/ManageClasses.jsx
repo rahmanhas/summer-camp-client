@@ -2,74 +2,58 @@ import axios from 'axios';
 import { Button, Label, Table, TextInput } from 'flowbite-react';
 import { Box, Typography, Modal } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { becomeApproved } from '../Utility/auth';
+import useAxiosSecure from '../Hooks/useAxiosSecure';
 
 const ManageClasses = () => {
     const [classes, setClasses] = useState([])
     const [showModal, setShowModal] = useState(false);
     const [selectedClass, setSelectedClass] = useState({});
-
+    const [axiosSecure] = useAxiosSecure()
+    const getData = () => {
+        axiosSecure.get(`/classinfo`).then(data => setClasses(data.data)).catch(error=>console.log(error))
+    }
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_SERVER_URL}/classinfo`)
-            .then(data => {
-                console.log(data.data);
-                setClasses(data.data)
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            })
-            .finally(function () {
-                // always executed
-            });
-
-    }, [])
+        getData()
+    }, [classes])
 
 
     const handleStatusApproved = (id) => {
-        axios.put(`${import.meta.env.VITE_SERVER_URL}/classdata/${id}`, {
+        axiosSecure.put(`/classdata/${id}`, {
             status: 'approved',
         }).then(() => {
             alert("class is Approved")
-            fetch(`${import.meta.env.VITE_SERVER_URL}/classinfo`)
-                .then((res) => res.json())
-                .then((data) => setClasses(data));
+            getData()
         })
             .catch((error) => console.error('Error updating class:', error));
     };
     const handleStatusDenied = (id) => {
-        axios.put(`${import.meta.env.VITE_SERVER_URL}/classdata/${id}`, {
+        axiosSecure.put(`/classdata/${id}`, {
             status: 'denied',
-        }).then(() => {
+        }
+        ).then(() => {
             alert("class is Denied")
-            fetch(`${import.meta.env.VITE_SERVER_URL}/classinfo`)
-                .then((res) => res.json())
-                .then((data) => setClasses(data));
+            getData()
         })
             .catch((error) => console.error('Error updating class:', error));
     };
     const handleOpenFeedbackModal = individualClass => {
         setSelectedClass(individualClass);
-        
         setShowModal(true);
     }
-    useEffect(()=>{
+    useEffect(() => {
         console.log(selectedClass);
-    },[selectedClass])
+    }, [selectedClass])
     const handleSubmitFeedback = (e) => {
         e.preventDefault();
         const fBack = e.target.feedback.value;
         console.log(fBack);
         setShowModal(false)
-
-        axios.put(`${import.meta.env.VITE_SERVER_URL}/classfeedback/${selectedClass._id}`, {
+        axiosSecure.put(`/classfeedback/${selectedClass._id}`, {
             feedback: `${fBack}`,
         }).then(() => {
             alert("Feedback is updated")
-            fetch(`${import.meta.env.VITE_SERVER_URL}/classinfo`)
-                .then((res) => res.json())
-                .then((data) => setClasses(data));
+            getData()
         }).catch((error) => console.error('Error updating class:', error));
     }
     const handleCloseModal = () => {
