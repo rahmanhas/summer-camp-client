@@ -14,6 +14,7 @@ import ManageClasses from '../Dashboards/ManageClasses';
 import ErrorPage from '../Pages/ErrorPage/Error.Page';
 import Instructor from '../Pages/Instructor/Instructor';
 import Classes from '../Pages/Classes/Classes';
+import MySelectedClasses from '../Dashboards/Student/MySelectedClasses';
 
 
 const Router = createBrowserRouter([
@@ -63,6 +64,9 @@ const Router = createBrowserRouter([
         },
         {
           path: '/dashboard/manageclasses', element: <ManageClasses></ManageClasses>
+        },
+        {
+          path: '/dashboard/selectedclasses', element: <MySelectedClasses></MySelectedClasses>
         },
       ]
     }

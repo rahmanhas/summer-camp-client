@@ -16,6 +16,13 @@ const LeftNav = () => {
                 <NavLink to='/dashboard/manageusers'>Manage Users</NavLink>
                 <NavLink to='/dashboard/manageclasses'>Manage Classes</NavLink>
             </>}
+            
+            {
+                role!=="instructor" && role !== "admin" && <>
+                <NavLink to='/dashboard/selectedclasses'>My Selected Classes</NavLink>
+                
+                </>
+            }
         </div>
     );
 };

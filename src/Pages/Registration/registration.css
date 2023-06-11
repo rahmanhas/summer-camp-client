@@ -30,7 +30,7 @@ body {
   
   p::before {
     display: inline;
-    content: "⚠ ";
+    
   }
   
   input {

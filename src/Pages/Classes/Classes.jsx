@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 // import { Button, Card } from 'flowbite-react';
 import {
     useQuery,
@@ -17,10 +17,15 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 
+
+
+
+
 const Classes = () => {
 
     const { user, loading, role } = useContext(AuthContext)
     const [axiosSecure] = useAxiosSecure();
+    const [selectedClass, setSelectedClass]= useState(null)
 
     // axiosSecure.get(`/classdetails/${user.email}`).then(data => setClasses(data.data)).catch(error=>console.log(error))
     const { data: classes = [], refetch } = useQuery({
@@ -32,11 +37,26 @@ const Classes = () => {
             return res.data
         }
     })
+    const updateUserCourseData = (id)=>{
+        const currentCourse = {
+            courseId: id,
+        }
+        return fetch(`${import.meta.env.VITE_SERVER_URL}/coursesinfo/${user.email}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(currentCourse),
+        }).then(res => res.json())
+
+    }
     const handleClassSelection = (classItem) => {
         console.log(classItem._id);
         if(!user){
             alert("Please Log In")
         }else{
+            
+            updateUserCourseData(classItem._id)
             alert("Check Dashboard")
         }
     }
@@ -50,7 +70,7 @@ const Classes = () => {
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5'>
                 {classes.map((classItem) => (
                     <div className='' key={classItem._id}>
-                        <Card sx={{ maxWidth: 345 }}>
+                        { classItem.status === "approved" && <Card sx={{ maxWidth: 345 }}>
                             <CardActionArea>
                                 <CardMedia
                                     sx={{ height: 400 }}
@@ -72,6 +92,9 @@ const Classes = () => {
                                     <Typography variant="h6" color="text.secondary">
                                         $ {classItem.price}
                                     </Typography>
+                                    <Typography variant="h6" color="text.secondary">
+                                        {classItem.status}
+                                    </Typography>
                                 </CardContent>
                             </CardActionArea>
                             <CardActions>
@@ -79,7 +102,7 @@ const Classes = () => {
                                     Select
                                 </Button>
                             </CardActions>
-                        </Card>
+                        </Card>}
                     </div>
                 ))}
             </div>
