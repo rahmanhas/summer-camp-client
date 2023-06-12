@@ -2,6 +2,7 @@ import React from 'react';
 import Banner from './Banner';
 import TopClasses from './TopClasses';
 import TopInstructors from './TopInstructors';
+import ExtraSection from './ExtraSection';
 
 
 
@@ -14,6 +15,7 @@ const Home = () => {
             <Banner></Banner>
             <TopClasses></TopClasses>
             <TopInstructors></TopInstructors>
+            <ExtraSection></ExtraSection>
         </div>
     );
 };

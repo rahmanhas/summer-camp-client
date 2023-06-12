@@ -84,4 +84,9 @@ export const saveUser = user => {
     const user = await response.json()
     return user?.role
   }
+  export const getUserId = async email => {
+    const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/users/${email}`)
+    const user = await response.json()
+    return user?._id
+  }
   

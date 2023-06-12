@@ -44,6 +44,7 @@ const ManageClasses = () => {
     useEffect(() => {
         console.log(selectedClass);
     }, [selectedClass])
+    
     const handleSubmitFeedback = (e) => {
         e.preventDefault();
         const fBack = e.target.feedback.value;
