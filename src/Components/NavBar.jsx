@@ -6,10 +6,10 @@ import { FaListUl } from "react-icons/fa";
 
 
 const menu = <>
-        <NavLink className={({ isActive }) => isActive ? "text-lg text-pink-400 mr-2 p-2 rounded-xl" : "mr-2 p-2"} to="/">Home</NavLink>
-        <NavLink className={({ isActive }) => isActive ? "text-lg text-pink-400 mr-2 p-2 rounded-xl" : "mr-2 p-2"} to="/instructor">Instructors</NavLink>
-        <NavLink className={({ isActive }) => isActive ? "text-lg text-pink-400 mr-2 p-2 rounded-xl" : "mr-2 p-2"} to="/classes">Classes</NavLink>
-        <NavLink className={({ isActive }) => isActive ? "text-lg text-pink-400 mr-2 p-2 rounded-xl" : "mr-2 p-2"} to="/dashboard">Dashboard</NavLink>
+        <NavLink className={({ isActive }) => isActive ? "text-lg text-blue-400 dark:text-white mr-2 p-2 rounded-xl" : "mr-2 p-2"} to="/">Home</NavLink>
+        <NavLink className={({ isActive }) => isActive ? "text-lg text-blue-400 dark:text-white mr-2 p-2 rounded-xl" : "mr-2 p-2"} to="/instructor">Instructors</NavLink>
+        <NavLink className={({ isActive }) => isActive ? "text-lg text-blue-400 dark:text-white mr-2 p-2 rounded-xl" : "mr-2 p-2"} to="/classes">Classes</NavLink>
+        <NavLink className={({ isActive }) => isActive ? "text-lg text-blue-400 dark:text-white mr-2 p-2 rounded-xl" : "mr-2 p-2"} to="/dashboard">Dashboard</NavLink>
     </>
 
 const NavBar = () => {
@@ -25,10 +25,10 @@ const NavBar = () => {
   
     return (
 
-        <div className='bg-neutral-100 flex justify-between align-center p-5 mx-auto w-full '>
+        <div className='bg-gray-100 flex justify-between align-center p-5 mx-auto w-full'>
             <div>
                 {/* logo  */}
-                <h2 className='text-2xl text-pink-500'>DanceFlow Academy</h2>
+                <h2 className='text-2xl text-blue-500'>DanceFlow Academy</h2>
             </div>
             <div className='hidden md:block'>
                 {/* menu options */}
@@ -40,12 +40,12 @@ const NavBar = () => {
                 {user ? <>
                     <div className='flex justify-between align-center'>
                     <img className="pr-2 rounded-full"  src={user?.photoURL} alt="" width={45} height={45} title={`${user?.displayName}`} />
-                    <button onClick={handleLogOut} type="button" className="text-white bg-pink-400 hover:bg-pink-700 focus:outline-none focus:ring-4 focus:ring-pink-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-pink-900">LogOut</button>
+                    <button onClick={handleLogOut} type="button" className="text-white bg-blue-400 hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-blue-900">LogOut</button>
                     </div>
                     </> : <>
                         <div className='flex justify-between align-center'>
                             
-                            <Link to="/login"><button className="text-white bg-pink-400 hover:bg-pink-700 focus:outline-none focus:ring-4 focus:ring-pink-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-pink-900" >login</button></Link>
+                            <Link to="/login"><button className="text-white bg-blue-400 hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-blue-900" >login</button></Link>
                         </div>
                     </>}
 

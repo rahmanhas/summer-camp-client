@@ -48,7 +48,7 @@ const MySelectedClasses = () => {
     }, [userData,])
     //console.log(userData);
     useEffect(() => {
-        axiosSecure.get(`studentcoursedetails/${user.email}`).then(data => setCourseData(data.data)).catch(error => console.log(error))
+        axiosSecure.get(`classpage`).then(data => setCourseData(data.data)).catch(error => console.log(error))
        
     },[])
     const handleDeleteClass = (userEmail, classId) => {
@@ -176,8 +176,8 @@ const MySelectedClasses = () => {
                             />
                         </div> */}
 
-                        <Button type="submit">
-                            Submit
+                        <Button className='my-10' type="submit">
+                            Pay
                         </Button>
 
                     </form>

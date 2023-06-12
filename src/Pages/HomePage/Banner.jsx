@@ -40,9 +40,9 @@
 //         </div>
 //       </AliceCarousel>
 //       <div className="absolute top-0 left-0 right-0 bottom-0 flex flex-col justify-center items-center p-6">
-//         <h2 className="text-3xl text-pink-300 font-bold py-3">Welcome to DanceFlow Academy</h2>
-//         <h3 className="text-2xl text-pink-400 py-3">Experience Rhythm</h3>
-//         <button className="bg-pink-100 hover:bg-pink-800 p-2 md:p-4 rounded-lg text-sm md:text-lg">Get Started</button>
+//         <h2 className="text-3xl text-blue-300 font-bold py-3">Welcome to DanceFlow Academy</h2>
+//         <h3 className="text-2xl text-blue-400 py-3">Experience Rhythm</h3>
+//         <button className="bg-blue-100 hover:bg-blue-800 p-2 md:p-4 rounded-lg text-sm md:text-lg">Get Started</button>
 //       </div>
 //     </div>
 //   );
@@ -83,12 +83,12 @@ const Banner = () => {
             />
 
             <div className="absolute top-13 left-0 right-0 bottom-0 flex justify-center items-end">
-                <div className="text-center">
-                    <h2 className="text-3xl font-extrabold py-3">
+                <div className="text-center ">
+                    <h2 className="text-3xl font-extrabold py-3 text-white">
                         Welcome to DanceFlow Academy
                     </h2>
-                    <h3 className="text-2xl py-3 font-bold">Experience Rhythm</h3>
-                    <button className="bg-pink-100 hover:bg-pink-800 p-2 md:p-4 rounded-lg text-sm md:text-lg">
+                    <h3 className="text-2xl py-3 font-bold text-white">Experience Rhythm</h3>
+                    <button className="bg-blue-500 hover:bg-blue-800 hover:text-white p-2 md:p-4 rounded-lg text-sm md:text-lg">
                         Get Started
                     </button>
                 </div>

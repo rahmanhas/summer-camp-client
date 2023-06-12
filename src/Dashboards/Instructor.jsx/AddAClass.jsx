@@ -47,7 +47,7 @@ const AddAClass = () => {
     }
     return (
         <div>
-            <h2 className='text-6xl text-center my-10'>Add A Class</h2>
+            <h2 className='pl-5 mt-5 text-xl '>Add A Class</h2>
             <form onSubmit={handleClassSubmit} className="flex max-w-md flex-col gap-4">
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-10 justify-center items-center'>
                     <div>

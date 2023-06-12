@@ -15,6 +15,7 @@ import ErrorPage from '../Pages/ErrorPage/Error.Page';
 import Instructor from '../Pages/Instructor/Instructor';
 import Classes from '../Pages/Classes/Classes';
 import MySelectedClasses from '../Dashboards/Student/MySelectedClasses';
+import EnrolledClasses from '../Dashboards/Student/EnrolledClasses';
 
 
 const Router = createBrowserRouter([
@@ -67,6 +68,9 @@ const Router = createBrowserRouter([
         },
         {
           path: '/dashboard/selectedclasses', element: <MySelectedClasses></MySelectedClasses>
+        },
+        {
+          path: '/dashboard/enrolledclasses', element: <EnrolledClasses></EnrolledClasses>
         },
       ]
     }

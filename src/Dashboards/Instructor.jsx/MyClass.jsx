@@ -54,7 +54,7 @@ const MyClass = () => {
     console.log(classes);
     return (
         <div>
-            <h2 className='text-6xl text-center my-10'>My Classes</h2>
+            <h2 className='pl-5 mt-5 text-xl '>My Classes</h2>
             <div className='mx-5'>
                 <Table hoverable>
                     <Table.Head>

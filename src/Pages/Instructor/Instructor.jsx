@@ -37,7 +37,7 @@ const Instructor = () => {
 
     return (
         <div>
-            <h2>Instructor</h2>
+            <h2 className='text-center text-6xl font-bold my-10'>Instructor List</h2>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center items-center mx-auto text-center'>
                 {instructors.map((item) => (
                     <div key={item._id}>
