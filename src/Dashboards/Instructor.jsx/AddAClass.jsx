@@ -2,7 +2,7 @@ import { Button, Checkbox, Label, TextInput, FileInput } from 'flowbite-react';
 import React, { useContext } from 'react';
 import { AuthContext } from '../../Provider/AuthProvider';
 import axios from 'axios';
-import swal from 'sweetalert2';
+
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
 const AddAClass = () => {

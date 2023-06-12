@@ -6,7 +6,7 @@ import { AuthContext } from '../Provider/AuthProvider';
 const LeftNav = () => {
     const { role } = useContext(AuthContext)
     return (
-        <div className='bg-gray-400 flex flex-col h-[100vh] pt-28'>
+        <div className='bg-gray-200 flex flex-col h-[100vh] pt-28'>
             <NavLink className="inline-flex gap-2 p-5" to="/"> <FaHome className='text-2xl'></FaHome> Home </NavLink>
             {role === "instructor" && <>
                 <NavLink className="inline-flex gap-2 p-5"  to='/dashboard/addaclass'>Add a Class</NavLink>
