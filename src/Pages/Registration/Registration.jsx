@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import './registration.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
-//import { saveUser } from '../../Utility/auth';
 import axios from 'axios';
 import { saveUser } from '../../Hooks/auth';
 
@@ -89,7 +88,6 @@ const Registration = () => {
                 {errors.password?.type === 'required' && <p className="text-yellow-300">Password is required</p>}
                 {errors.password?.type === 'minLength' && <p className="text-yellow-300">Password must be 6 characters</p>}
                 {errors.password?.type === 'pattern' && <p className="text-yellow-300">Password must have one Uppercase and one lower case letter, one number digit and one special character.</p>}
-
                 <label>Confirm Password</label>
                 <input
                     type="password"
@@ -99,8 +97,6 @@ const Registration = () => {
                     })}
                 />
                 {errors.confirmPassword && <p className='text-yellow-300'>{errors.confirmPassword.message}</p>}
-
-
                 <label>PhotoURL</label>
                 <input
                     type="file"
@@ -118,7 +114,6 @@ const Registration = () => {
                     {...register("mobileNumber", {
                         required: true,
                         maxLength: 11,
-                        
                     })}
                 />
                 {error && <p className='text-yellow-300'>{error}</p>}
