@@ -9,7 +9,6 @@ import { Button } from 'flowbite-react';
 import { GoogleAuthProvider } from 'firebase/auth';
 import { saveUser } from '../../Hooks/auth';
 // import { saveUser } from '../../Hooks/auth';
-
 const googleProvider = new GoogleAuthProvider();
 const Login = () => {
     const navigate = useNavigate();
@@ -52,17 +51,13 @@ const Login = () => {
             const name = result.user.displayName;
             const email = result.user.email;
             const photoURL = result.user.photoURL;
-
             const googleUser = {name,email,photoURL}
             saveUser(googleUser)
-            
         }).catch(error=>setError(error.message))
     };
-
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
-
     return (
         <div className='bg-black text-black'>
             <h2 className='text-6xl text-center font-bold text-white py-5'>Log In</h2>

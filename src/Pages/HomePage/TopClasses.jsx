@@ -38,14 +38,7 @@ const TopClasses = () => {
                     <div className='relative' key={classItem._id}>
                         <img className='rounded-full h-[250px] w-[250px] mx-auto my-5' src={classItem.photoURL} alt="" />
                         <button className='absolute top-0 left-0 bottom-0  right-0 hover:text-black text-red-800 flex justify-center items-center text-3xl font-extrabold uppercase'>{classItem.className}</button>
-                        {/* <Button
-                            gradientDuoTone="purpleToBlue"
-                            outline
-                            className='absolute top-0 left-0 bottom-0  right-0 text-red-800 flex justify-center items-center text-3xl font-extrabold uppercase'
-                        >
-                            {classItem.className}
-                        </Button> */}
-                        {/* <h2 className='absolute top-0 left-0 bottom-0  right-0 text-red-800 flex justify-center items-center text-3xl font-extrabold uppercase'>{classItem.className}</h2> */}
+
 
                     </div>
                 ))}

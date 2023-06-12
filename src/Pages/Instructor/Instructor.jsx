@@ -15,7 +15,6 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-// import { getTodos, postTodo } from '../my-api'
 
 import { AuthContext } from '../../Provider/AuthProvider';
 
@@ -23,7 +22,6 @@ const Instructor = () => {
     const { user, loading } = useContext(AuthContext)
     const [axiosSecure] = useAxiosSecure();
 
-    // axiosSecure.get(`/classdetails/${user.email}`).then(data => setClasses(data.data)).catch(error=>console.log(error))
     const { data: instructors = [], refetch } = useQuery({
         queryKey: ['allusers'],
         enabled: !loading,
@@ -33,8 +31,6 @@ const Instructor = () => {
             return res.data
         }
     })
-
-
     return (
         <div>
             <h2 className='text-center text-6xl font-bold my-10'>Instructor List</h2>
