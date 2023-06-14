@@ -3,12 +3,12 @@ import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { Button } from 'flowbite-react';
 import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
 import CheckoutForm from './CheckOutForm';
-const stripePromise = loadStripe(`${import.meta.env.Vite_Payment_Gateway_PK}`);
 import { Box, Typography, Modal } from '@mui/material';
-import {  Label, Table, TextInput } from 'flowbite-react';
+import { Label, Table, TextInput } from 'flowbite-react';
 import { getUserId } from '../../Hooks/auth';
+import { loadStripe } from '@stripe/stripe-js';
+const stripePromise = loadStripe(`${import.meta.env.Vite_Payment_Gateway_PK}`);
 
 const MySelectedClasses = () => {
     const { user, role } = useContext(AuthContext)
@@ -18,20 +18,20 @@ const MySelectedClasses = () => {
     const [showModal, setShowModal] = useState(false);
     const [selectedClass, setSelectedClass] = useState({});
     const [currentUserID, setCurrentUserID] = useState('');
-    
-    useEffect(()=>{
-        fetch(`${import.meta.env.VITE_SERVER_URL}/users/${user.email}`).then(res=>res.json()).then(data=>setCurrentUserID(data._id))
-    },[])
+
+    useEffect(() => {
+        fetch(`${import.meta.env.VITE_SERVER_URL}/users/${user.email}`).then(res => res.json()).then(data => setCurrentUserID(data._id))
+    }, [])
 
 
-    const deleteCourseId = (id)=>{
+    const deleteCourseId = (id) => {
         console.log(id);
         axiosSecure
             .put(`/coursesinforemove/${user.email}`, {
                 courseId: id,
             })
             .then(() => {
-                
+
             })
             .catch((error) => {
                 console.error('Error removing course ID:', error);
@@ -49,12 +49,12 @@ const MySelectedClasses = () => {
     //console.log(userData);
     useEffect(() => {
         axiosSecure.get(`classpage`).then(data => setCourseData(data.data)).catch(error => console.log(error))
-       
-    },[])
+
+    }, [])
     const handleDeleteClass = (userEmail, classId) => {
         console.log(userEmail, classId);
         deleteCourseId(classId)
-        
+
     }
     const handleClassPayment = (userEmail, classId) => {
         console.log(userEmail, classId);
@@ -66,7 +66,7 @@ const MySelectedClasses = () => {
         setSelectedClass(null);
 
     };
-    const handleSubmitPayment =(e)=>{
+    const handleSubmitPayment = (e) => {
         e.preventDefault()
         const currentCourse = {
             courseId: selectedClass?._id,
@@ -80,21 +80,22 @@ const MySelectedClasses = () => {
             body: JSON.stringify(currentCourse),
         }).then(res => res.json())
         //add info of student in class db
-        
+
         fetch(`${import.meta.env.VITE_SERVER_URL}/paidcoursesinfoinclasses/${selectedClass.instructorEmail}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json',
             },
-            body: JSON.stringify({'studentId':currentUserID}),
+            body: JSON.stringify({ 'studentId': currentUserID }),
         }).then(res => res.json())
         // delete from selected courseIds
         deleteCourseId(selectedClass?._id)
         setShowModal(false);
+
     }
     return (
         <div>
-            <h2>My selected courses</h2>
+            <h2 className='m-5 text-xl'>My selected courses</h2>
             <Table hoverable>
                 <Table.Head>
                     <Table.HeadCell>
@@ -134,21 +135,20 @@ const MySelectedClasses = () => {
                                 <Table.Cell>{selectedCourse?.price}</Table.Cell>
                                 <Table.Cell><Button className='' onClick={() => handleDeleteClass(user?.email, classItem)} color="failure">Delete</Button></Table.Cell>
                                 <Table.Cell><Button className='' onClick={() => handleClassPayment(user?.email, selectedCourse)} color="warning">Payment</Button></Table.Cell>
-                                
+
                             </Table.Row>
                         );
                     })}
                 </Table.Body>
             </Table>
 
-            {/* <Elements stripe={stripePromise}>
-                <CheckoutForm></CheckoutForm>
-            </Elements> */}
+
             <Modal
                 open={showModal}
                 onClose={handleCloseModal}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
+                className='bg-grey-400'
             >
                 <Box
                     sx={{
@@ -161,21 +161,9 @@ const MySelectedClasses = () => {
                     </Typography>
 
                     <form onSubmit={handleSubmitPayment} className="flex max-w-md flex-col gap-4">
-                        {/* <div>
-                            <div className="mb-2 block">
-                                <Label
-                                    htmlFor="feedback"
-                                    value="Give Feedback"
-                                />
-                            </div>
-                            <TextInput
-                                id="feedback"
-                                name="feedback"
-                                required
-                                type="text"
-                            />
-                        </div> */}
-
+                        {/* <Elements stripe={stripePromise}>
+                            <CheckoutForm></CheckoutForm>
+                        </Elements> */}
                         <Button className='my-10' type="submit">
                             Pay
                         </Button>
@@ -183,7 +171,7 @@ const MySelectedClasses = () => {
                     </form>
                 </Box>
             </Modal>
-            
+
         </div>
     );
 };

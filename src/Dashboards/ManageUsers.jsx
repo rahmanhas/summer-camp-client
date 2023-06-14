@@ -1,9 +1,7 @@
 import { Button, Table } from 'flowbite-react';
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { becomeAdmin, becomeInstructor } from '../Hooks/auth';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
-// import { becomeAdmin, becomeInstructor } from '../Utility/auth';
 
 const ManageUsers = () => {
     const [allEmail, setAllEmail] = useState([])
@@ -11,11 +9,11 @@ const ManageUsers = () => {
     const [axiosSecure] = useAxiosSecure()
 
     useEffect(() => {
-        axiosSecure.get(`/allusers`).then(data => setAllEmail(data.data)).catch(error=>console.log(error))
+        axiosSecure.get(`/allusers`).then(data => setAllEmail(data.data)).catch(error => console.log(error))
     }, [currentEmail, allEmail])
 
     const handleMakeAdmin = email => {
-        //console.log(email);
+
         becomeAdmin(email).then(data => {
             console.log(data);
             setCurrentEmail(email)
@@ -23,7 +21,7 @@ const ManageUsers = () => {
         })
     }
     const handleMakeInstructor = email => {
-        //console.log(email);
+
         becomeInstructor(email).then(data => {
             console.log(data);
             setCurrentEmail(email)

@@ -52,7 +52,6 @@
 import React from 'react';
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
-
 import banner1 from '../../assets/banner-1.webp';
 import banner2 from '../../assets/banner-2.jpg';
 import banner3 from '../../assets/banner-3.jpg';
@@ -82,12 +81,12 @@ const Banner = () => {
                 responsive={responsive}
             />
 
-            <div className="absolute top-13 left-0 right-0 bottom-0 flex justify-center items-end">
+            <div className="absolute hidden top-13 left-0 right-0 bottom-0 sm:flex justify-center items-end">
                 <div className="text-center ">
-                    <h2 className="text-3xl font-extrabold py-3 text-white">
+                    <h2 className="text-3xl font-extrabold py-3 text-white dark:text-black">
                         Welcome to DanceFlow Academy
                     </h2>
-                    <h3 className="text-2xl py-3 font-bold text-white">Experience Rhythm</h3>
+                    <h3 className="text-2xl py-3 font-bold text-white dark:text-black">Experience Rhythm</h3>
                     <button className="bg-blue-500 hover:bg-blue-800 hover:text-white p-2 md:p-4 rounded-lg text-sm md:text-lg">
                         Get Started
                     </button>

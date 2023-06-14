@@ -5,7 +5,6 @@ import Home from '../Pages/HomePage/Home';
 import Registration from '../Pages/Registration/Registration';
 import Login from '../Pages/Login/Login';
 import Dashboard from '../Layout/Dashboard';
-// import Instructor from '../Dashboards/Instructor.jsx/Instructor';
 import PrivateRoute from './PrivateRoute';
 import AddAClass from '../Dashboards/Instructor.jsx/AddAClass';
 import MyClass from '../Dashboards/Instructor.jsx/MyClass';
@@ -50,10 +49,6 @@ const Router = createBrowserRouter([
       path:"/dashboard",
       element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
       children:[
-        // {
-        //   path: '/dashboard/instructor',
-        //   element: <Instructor></Instructor>,
-        // },
         {
           path: '/dashboard/addaclass', element: <AddAClass></AddAClass>
         },

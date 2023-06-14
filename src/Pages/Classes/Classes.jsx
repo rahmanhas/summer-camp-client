@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-// import { Button, Card } from 'flowbite-react';
 import {
     useQuery,
     useMutation,
@@ -9,17 +8,11 @@ import {
 } from '@tanstack/react-query'
 import { AuthContext } from '../../Provider/AuthProvider';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
-
-
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
-
-
-
-
 
 const Classes = () => {
 
@@ -27,7 +20,7 @@ const Classes = () => {
     const [axiosSecure] = useAxiosSecure();
     const [selectedClass, setSelectedClass]= useState(null)
 
-    // axiosSecure.get(`/classdetails/${user.email}`).then(data => setClasses(data.data)).catch(error=>console.log(error))
+    
     const { data: classes = [], refetch } = useQuery({
         queryKey: ['classpage'],
         enabled: !loading,
@@ -98,7 +91,7 @@ const Classes = () => {
                                 </CardContent>
                             </CardActionArea>
                             <CardActions>
-                                <Button onClick={()=>handleClassSelection(classItem) } size="large" color="primary" disabled={role === "admin" || role === "instructor" || classItem.availableSeats === 0}>
+                                <Button onClick={()=>handleClassSelection(classItem) } size="large" color="primary" disabled={role === "admin" || role === "instructor" || classItem.availableSeats == 0}>
                                     Select
                                 </Button>
                             </CardActions>
@@ -111,55 +104,3 @@ const Classes = () => {
 };
 
 export default Classes;
-
-{/* <Card
-    imgAlt=""
-    imgSrc=""
-    className=''
-
->
-    <img
-        src={classItem.photoURL}
-        alt=""
-
-        className='max-w-[400px] max-h-[400px]'
-    />
-
-    <a href="#">
-        <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-
-            Course Name: {classItem.className}
-
-        </h5>
-        <h5 className="text-md font-semibold tracking-tight text-gray-900 dark:text-white">
-
-            Instructor Name: {classItem.instructorName}
-
-        </h5>
-
-    </a>
-    <div className="mb-5 mt-2.5 flex items-center">
-
-        <span className="ml-3 mr-2 rounded bg-cyan-100 px-2.5 py-0.5 text-lg font-semibold text-cyan-800 dark:bg-cyan-200 dark:text-cyan-800">
-            <h3>
-                Available Seats: {classItem.availableSeats}
-            </h3>
-        </span>
-    </div>
-    <div className="flex items-center justify-between">
-        <span className="text-3xl font-bold text-gray-900 dark:text-white">
-            $ {classItem.price}
-        </span>
-        {/* <a
-                                    className="rounded-lg bg-cyan-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-cyan-800 focus:outline-none focus:ring-4 focus:ring-cyan-300 dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800"
-                                    href="#"
-                                >
-                                    <p>
-                                        Add to cart
-                                    </p>
-                                // </a> */}
-        // <Button onClick={handleClassSeletion} color="purple">
-        //     Select
-        // </Button>
-//     </div>
-// </Card> */}

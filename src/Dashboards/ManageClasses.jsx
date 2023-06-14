@@ -17,7 +17,6 @@ const ManageClasses = () => {
         getData()
     }, [classes])
 
-
     const handleStatusApproved = (id) => {
         axiosSecure.put(`/classdata/${id}`, {
             status: 'approved',

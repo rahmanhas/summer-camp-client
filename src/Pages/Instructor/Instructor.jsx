@@ -7,8 +7,6 @@ import {
     QueryClient,
     QueryClientProvider,
 } from '@tanstack/react-query'
-
-
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -46,7 +44,7 @@ const Instructor = () => {
                             <CardContent>
                                 <Typography gutterBottom variant="h4" component="div">
                                     {item.name}
-                                    
+
                                 </Typography>
                                 <Typography variant="h5" color="text.secondary">
                                     {item.email}

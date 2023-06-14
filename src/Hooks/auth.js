@@ -1,7 +1,4 @@
-
-
 // save a user to database
-
 export const saveUser = user => {
     const currentUser = {
         email: user.email,
@@ -21,20 +18,6 @@ export const saveUser = user => {
       .then(data => console.log(data))
   }
   
-  // update selected course information in user database
-  //export const selectCourse = id => {
-    // const currentUser = {
-    //   courseId: id,
-    // }
-  
-    // return fetch(`${import.meta.env.VITE_SERVER_URL}/users/${email}`, {
-    //   method: 'PUT',
-    //   headers: {
-    //     'content-type': 'application/json',
-    //   },
-    //   body: JSON.stringify(currentUser),
-    // }).then(res => res.json())
-  //}
   // become a admin
   export const becomeAdmin = email => {
     const currentUser = {

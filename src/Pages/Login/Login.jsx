@@ -4,11 +4,9 @@ import { FaEye, FaEyeSlash, FaGoogle } from 'react-icons/fa';
 import '../Registration/registration.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
-import { GoogleLogin } from 'react-google-login';
 import { Button } from 'flowbite-react';
 import { GoogleAuthProvider } from 'firebase/auth';
 import { saveUser } from '../../Hooks/auth';
-// import { saveUser } from '../../Hooks/auth';
 const googleProvider = new GoogleAuthProvider();
 const Login = () => {
     const navigate = useNavigate();
